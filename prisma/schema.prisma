@@ -14,31 +14,31 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  username   String   @unique
-  password   String
-  firstName  String   @default("")
-  lastName   String   @default("")
-  isActive   Boolean  @default(false)
-  isBlocked  Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  firstName String   @default("")
+  lastName  String   @default("")
+  isActive  Boolean  @default(false)
+  isBlocked Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   conversations Conversation[] @relation("CreatorConversations")
   participants  Participant[]
   blocks        BlockList[]
-  Message       Message[]
+  messages      Message[]
 }
 
 model Conversation {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   title     String
-  creator   User      @relation("CreatorConversations", fields: [creatorId], references: [id])
+  creator   User     @relation("CreatorConversations", fields: [creatorId], references: [id])
   creatorId Int
   channelId String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   participants Participant[]
   messages     Message[]
