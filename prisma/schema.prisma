@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./sqlite.db"
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  username   String   @unique
+  password   String
+  firstName  String   @default("")
+  lastName   String   @default("")
+  isActive   Boolean  @default(false)
+  isBlocked  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  conversations Conversation[] @relation("CreatorConversations")
+  participants  Participant[]
+  blocks        BlockList[]
+  Message       Message[]
+}
+
+model Conversation {
+  id        Int       @id @default(autoincrement())
+  title     String
+  creator   User      @relation("CreatorConversations", fields: [creatorId], references: [id])
+  creatorId Int
+  channelId String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  participants Participant[]
+  messages     Message[]
+}
+
+model Participant {
+  id             Int             @id @default(autoincrement())
+  conversation   Conversation    @relation(fields: [conversationId], references: [id])
+  conversationId Int
+  user           User            @relation(fields: [userId], references: [id])
+  userId         Int
+  type           ParticipantType
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  BlockList      BlockList[]
+
+  @@unique([conversationId, userId])
+}
+
+enum ParticipantType {
+  single
+  group
+}
+
+model Message {
+  id             Int          @id @default(autoincrement())
+  guid           String       @unique
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId Int
+  sender         User         @relation(fields: [senderId], references: [id])
+  senderId       Int
+  messageType    MessageType
+  message        String       @default("")
+  createdAt      DateTime     @default(now())
+
+  attachments Attachment[]
+}
+
+enum MessageType {
+  text
+  image
+  video
+  audio
+}
+
+model Attachment {
+  id        Int      @id @default(autoincrement())
+  message   Message  @relation(fields: [messageId], references: [id])
+  messageId Int
+  thumbUrl  String
+  fileUrl   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BlockList {
+  id            Int         @id @default(autoincrement())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        Int
+  participant   Participant @relation(fields: [participantId], references: [id])
+  participantId Int
+  createdAt     DateTime    @default(now())
+}
