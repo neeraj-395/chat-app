@@ -22,8 +22,8 @@ export class CreateParticipantDto {
 }
 
 export class CreateMessageDto {
-  @IsInt()
-  conversationId: number;
+  @IsString()
+  roomId: string;
 
   @IsInt()
   senderId: number;

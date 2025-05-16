@@ -26,8 +26,8 @@ export class ChatController {
         return this.chatService.createMessage(dto);
     }
 
-    @Get('messages/:conversationId')
-    async getMessages(@Param('conversationId', ParseIntPipe) convoId: number) {
-        return this.chatService.getMessages(convoId);
+    @Get('messages/:roomId')
+    async getMessages(@Param('roomId', ParseIntPipe) roomId: string) {
+        return this.chatService.getMessages(roomId);
     }
 }

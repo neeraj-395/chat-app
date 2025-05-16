@@ -13,7 +13,7 @@ export class ChatService {
 
     async createConversation({ title, creatorId }: CreateConversationDto) {
         return this.prisma.conversation.create({
-            data: {title, creatorId, channelId: `chan-${crypto.randomUUID()}`}
+            data: {title, creatorId, roomId: `room-${crypto.randomUUID()}`}
         })
     }
 
@@ -29,15 +29,15 @@ export class ChatService {
         return this.prisma.participant.create({data: { conversationId, userId, type }});
     }
 
-    async createMessage({conversationId, senderId, message, messageType}: CreateMessageDto) {
+    async createMessage({roomId, senderId, message, messageType}: CreateMessageDto) {
         return this.prisma.message.create({
-            data: { conversationId, senderId, message, messageType, guid: crypto.randomUUID() },
+            data: { roomId, senderId, message, messageType, guid: crypto.randomUUID() },
         });
     }
 
-    async getMessages(conversationId: number) {
+    async getMessages(roomId: string) {
         return this.prisma.message.findMany({
-            where: {conversationId},
+            where: {roomId},
             orderBy: {createdAt: 'asc'}
         });
     }

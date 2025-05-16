@@ -36,7 +36,7 @@ model Conversation {
   title     String
   creator   User     @relation("CreatorConversations", fields: [creatorId], references: [id])
   creatorId Int
-  channelId String
+  roomId    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -64,17 +64,17 @@ enum ParticipantType {
 }
 
 model Message {
-  id             Int          @id @default(autoincrement())
-  guid           String       @unique
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
-  conversationId Int
-  sender         User         @relation(fields: [senderId], references: [id])
-  senderId       Int
-  messageType    MessageType
-  message        String       @default("")
-  createdAt      DateTime     @default(now())
+  id           Int          @id @default(autoincrement())
+  guid         String       @unique
+  roomId       String
+  conversation Conversation @relation(fields: [roomId], references: [roomId])
+  sender       User         @relation(fields: [senderId], references: [id])
+  senderId     Int
+  messageType  MessageType
+  message      String       @default("")
+  createdAt    DateTime     @default(now())
 
-  attachments Attachment[]
+  attachments  Attachment[]
 }
 
 enum MessageType {

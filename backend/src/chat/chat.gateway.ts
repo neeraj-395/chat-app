@@ -23,10 +23,10 @@ export class ChatGateway implements OnGatewayConnection {
   @SubscribeMessage('message')
   async handleMessage(@MessageBody() dto: CreateMessageDto) {
     const msg = await this.chatService.createMessage(dto);
-    this.server.to(`room-${dto.conversationId}`).emit('message', msg);
+    this.server.to(dto.roomId).emit('message', msg);
   }
 
-  handleJoinChannel(@MessageBody() data: { conversationId: string }) {
-    this.server.socketsJoin(`room-${data.conversationId}`);
+  handleJoinChannel(@MessageBody() data: { roomId: string }) {
+    this.server.socketsJoin(data.roomId);
   }
 }
