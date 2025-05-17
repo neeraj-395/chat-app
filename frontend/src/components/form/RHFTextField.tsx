@@ -1,7 +1,7 @@
 import { useFormContext, Controller } from 'react-hook-form';
 import { TextField, type TextFieldProps } from '@mui/material';
 
-type RHFTextFieldProps = TextFieldProps & { name: string; };
+export type RHFTextFieldProps = TextFieldProps & { name: string; };
 
 export default function RHFTextField({ name, helperText, ...other }: RHFTextFieldProps) {
     const { control } = useFormContext();
