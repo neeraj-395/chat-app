@@ -4,19 +4,23 @@ import { useTheme } from "@mui/material/styles";
 import NavButton from './NavButton';
 import AntSwitch from "../AntSwitch";
 import NavMenuItem from "./NavMenuItem";
+import { useAppDispatch } from '../../app/hook';
+import { toggleMode } from '../../features/SettingsSlice';
 import {
     Avatar, Box, Divider,
     Menu, MenuList, Stack
 } from '@mui/material';
-import { 
-    ChatCircleDots, Users, 
-    GearSix, Gear, User, SignOut 
+import {
+    ChatCircleDots, Users,
+    GearSix, Gear, User, SignOut
 } from "phosphor-react";
 
 
 const DashboardLayout = () => {
     const theme = useTheme();
+    const dispatch = useAppDispatch();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const handleNavMenu = () => setAnchorEl(null);
     const showMenu = Boolean(anchorEl);
 
     return (
@@ -50,16 +54,16 @@ const DashboardLayout = () => {
                         </Box>
 
                         <Stack direction='column' alignItems='center' spacing={3}>
-                            <NavButton icon={<ChatCircleDots />} onClick={() => { }} isSelected={false} />
-                            <NavButton icon={<Users />} onClick={() => { }} isSelected={false} />
+                            <NavButton theme={theme} icon={<ChatCircleDots />} to={'/app'} />
+                            <NavButton theme={theme} icon={<Users />} to={'/group'} />
                             <Divider sx={{ width: 48 }} />
-                            <NavButton icon={<GearSix />} onClick={() => { }} isSelected={false} />
+                            <NavButton theme={theme} icon={<GearSix />} to={'/settings'} />
                         </Stack>
                     </Stack>
 
                     {/* Botton section */}
                     <Stack spacing={4}>
-                        <AntSwitch onChange={()=>{}} defaultChecked /> {/* theme toggle */}
+                        <AntSwitch onChange={() => dispatch(toggleMode())} defaultChecked />
 
                         <Avatar
                             id='basic-button'
@@ -75,15 +79,16 @@ const DashboardLayout = () => {
                             id="basic-menu"
                             anchorEl={anchorEl}
                             open={showMenu}
+                            aria-hidden={!showMenu}
                             onClose={() => setAnchorEl(null)}
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                         >
-                            <MenuList aria-labelledby='basic-button'>
+                            <MenuList aria-labelledby='basic-button' sx={{ outline: 'none' }}>
                                 <Stack spacing={1} px={1}>
-                                    <NavMenuItem title='Profile' icon={<User/>} onClick={()=>{}}/>
-                                    <NavMenuItem title='Settings' icon={<Gear/>} onClick={()=>{}}/>
-                                    <NavMenuItem title='Logout' icon={<SignOut/>} onClick={()=>{}}/>
+                                    <NavMenuItem title='Profile' to={'/profile'} icon={<User />} onClick={handleNavMenu} />
+                                    <NavMenuItem title='Settings' to={'/settings/account'} icon={<Gear />} onClick={handleNavMenu} />
+                                    <NavMenuItem title='Logout' to={'/logout'} icon={<SignOut />} onClick={handleNavMenu} />
                                 </Stack>
                             </MenuList>
                         </Menu>

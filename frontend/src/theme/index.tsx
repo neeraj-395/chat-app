@@ -12,7 +12,6 @@ import {
   type ThemeOptions,
 } from '@mui/material/styles';
 
-
 interface ThemeProviderProps { children: ReactNode; }
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
