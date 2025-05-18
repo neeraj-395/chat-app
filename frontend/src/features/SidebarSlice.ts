@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { SidebarType } from "../app/constants";
+import { SidebarType } from "../app/constants";
 
 export interface SidebarState { open: boolean; type: SidebarType; }
 
-const initialState: SidebarState = { open: false, type: "contact" }
+const initialState: SidebarState = { open: false, type: SidebarType.CONTACT }
 
 const SidebarSlice = createSlice({
     name:'sidebar',
