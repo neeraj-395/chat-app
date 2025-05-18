@@ -54,8 +54,8 @@ const DashboardLayout = () => {
                         </Box>
 
                         <Stack direction='column' alignItems='center' spacing={3}>
-                            <NavButton theme={theme} icon={<ChatCircleDots />} to={'/app'} />
-                            <NavButton theme={theme} icon={<Users />} to={'/group'} />
+                            <NavButton theme={theme} icon={<ChatCircleDots />} to={'/chats'} />
+                            <NavButton theme={theme} icon={<Users />} to={'/groups'} />
                             <Divider sx={{ width: 48 }} />
                             <NavButton theme={theme} icon={<GearSix />} to={'/settings'} />
                         </Stack>
@@ -87,7 +87,7 @@ const DashboardLayout = () => {
                             <MenuList aria-labelledby='basic-button' sx={{ outline: 'none' }}>
                                 <Stack spacing={1} px={1}>
                                     <NavMenuItem title='Profile' to={'/profile'} icon={<User />} onClick={handleNavMenu} />
-                                    <NavMenuItem title='Settings' to={'/settings/account'} icon={<Gear />} onClick={handleNavMenu} />
+                                    <NavMenuItem title='Settings' to={'/settings'} icon={<Gear />} onClick={handleNavMenu} />
                                     <NavMenuItem title='Logout' to={'/logout'} icon={<SignOut />} onClick={handleNavMenu} />
                                 </Stack>
                             </MenuList>
