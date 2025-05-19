@@ -6,7 +6,7 @@ export interface NavButtonProps {theme: Theme,  icon: ReactNode; to: string }
 
 const NavButton = ({theme, icon, to}: NavButtonProps) => {
     const location = useLocation();
-    const isSelected = location.pathname === to;
+    const isSelected = location.pathname.includes(to);
     const bgColor = isSelected ? theme.palette.primary.main : 'transparent';
     const btColor = isSelected ? '#fff' : theme.palette.mode === 'light' ? '#000' : theme.palette.text.primary;
     return (
