@@ -1,12 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import SignUp from "./routes/SignUp"
 import SignIn from "./routes/SignIn"
-import Chats from './routes/Chats';
 import Groups from "./routes/Groups";
 import MainLayout from "./components/layouts/MainLayout"
-import DashboardLayout from "./components/layouts/DashboardLayout"
+import DashboardLayout from "./components/layouts/DashboardLayout";
 import Settings from "./routes/Settings";
-import Conversation from "./components/conversation";
+import Chats from "./routes/Chats";
 
 function App() {
   return (
@@ -20,6 +19,7 @@ function App() {
 
         {/* Dashboard layout */}
         <Route element={<DashboardLayout />}>
+          <Route path="/" element={<Navigate to={"/chats"} replace/>} />
           <Route path="/chats" element={<Chats />}/>
           <Route path="/groups" element={<Groups />}/>
           <Route path="/settings" element={<Settings />} />

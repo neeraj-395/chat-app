@@ -8,14 +8,17 @@ const DocMessage = ({ theme, incoming, message, caption, showMenu }: DocMessageP
     return (
         <MessageBody theme={theme} incoming={incoming} showMenu={showMenu}>
             <Stack spacing={2}>
-                <Stack p={2} spacing={3} direction='row' alignItems='center'
-                    sx={{ backgroundColor: theme.palette.background.paper, borderRadius: 1 }}>
+                <Stack p={2} spacing={1} direction='row' 
+                    alignItems='center' justifyContent={'center'}
+                    sx={{ backgroundColor: theme.palette.background.paper, borderRadius: 1 }}
+                >
                     <Image size={48} />
                     <Typography variant='caption'>{caption}</Typography>
                     <IconButton><DownloadSimple /></IconButton>
                 </Stack>
-                <Typography variant='body2' 
-                    sx={{ color: incoming ? theme.palette.text.primary : '#fff' }} 
+                <Typography variant='body2' sx={{ 
+                    color: incoming ? theme.palette.text.primary : '#fff', 
+                }}
                 >
                     {message}
                 </Typography>

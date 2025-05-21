@@ -7,7 +7,7 @@ import ChatTooltip from "./ChatTooltip";
 interface ChatInputProps { setOpenPicker: (value: SetStateAction<boolean>) => void; }
 
 const StyledInput = styled(TextField)(() => ({
-    "& .MuiInputBase-input": { paddingTop: '12px', paddingBottom: '12px' }
+    "& .MuiInputBase-input": { paddingTop: '12px', paddingBottom: '12px' },
 }));
 
 const ChatInput = ({ setOpenPicker }: ChatInputProps) => {
@@ -24,7 +24,7 @@ const ChatInput = ({ setOpenPicker }: ChatInputProps) => {
                             <ChatTooltip title={'Image'} icon={<Camera size={24} />} style={{ backgroundColor: "#0172e4", top: -242 }} />
                             <ChatTooltip title={'Document'} icon={<File size={24} />} style={{ backgroundColor: "#0159b2", top: -312 }} />
                         </Stack>
-                        <InputAdornment position="start">
+                        <InputAdornment position="start" sx={{marginTop: '0px !important'}}>
                             <IconButton onClick={() => setOpenAction(prev => !prev)}>
                                 <LinkSimple />
                             </IconButton>

@@ -12,9 +12,9 @@ export interface MessageBodyProps {
 const MessageBody = ({children, theme, incoming, showMenu}: MessageBodyProps) => {
     return (
         <Stack direction='row' justifyContent={incoming ? 'start' : 'end'}>
-            <Box p={1.5} sx={{
-                backgroundColor: incoming ? theme.palette.background.default :
-                    theme.palette.primary.main, borderRadius: 1.5, width: 'max-content'
+            <Box p={1.5} justifyContent={'center'} sx={{
+                backgroundColor: incoming ? theme.palette.background.paper :
+                theme.palette.primary.main, borderRadius: 1.5, maxWidth: '40%'
             }}>
                 {children}
             </Box>

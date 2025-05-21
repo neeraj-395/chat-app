@@ -25,34 +25,32 @@ const SignIn = () => {
 	}
 
 	return (
-		<>
-			<Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-				<Typography variant='h4'>
-					Login to ChatApp
-				</Typography>
-				<Stack direction='row' spacing={0.5}>
-					<Typography variant='body2'>New User?</Typography>
-					<Link to='/auth/signup' component={RouterLink} variant='subtitle2'>Create an account</Link>
-				</Stack>
-
-				{/* SignIn Form */}
-				<RHFormProvider methods={methods} onSubmit={onSubmit}>
-					<Stack spacing={3}>
-						{!!methods.formState.errors.root && <Alert severity='error'>{
-							methods.formState.errors.root.message
-						}</Alert>}
-
-						<RHFTextField name='username' label='Username' />
-						<PasswordField name='password' label='Password' />
-
-						<SubmitButton>Login</SubmitButton>
-					</Stack>
-				</RHFormProvider>
-
-				{/* Auth Socials */}
-				<AuthSocials />
+		<Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
+			<Typography variant='h4'>
+				Login to ChatApp
+			</Typography>
+			<Stack direction='row' spacing={0.5}>
+				<Typography variant='body2'>New User?</Typography>
+				<Link to='/auth/signup' component={RouterLink} variant='subtitle2'>Create an account</Link>
 			</Stack>
-		</>
+
+			{/* SignIn Form */}
+			<RHFormProvider methods={methods} onSubmit={onSubmit}>
+				<Stack spacing={3}>
+					{!!methods.formState.errors.root && <Alert severity='error'>{
+						methods.formState.errors.root.message
+					}</Alert>}
+
+					<RHFTextField name='username' label='Username' />
+					<PasswordField name='password' label='Password' />
+
+					<SubmitButton>Login</SubmitButton>
+				</Stack>
+			</RHFormProvider>
+
+			{/* Auth Socials */}
+			<AuthSocials />
+		</Stack>
 	)
 }
 

@@ -27,11 +27,11 @@ const MessageOptions = () => {
                 <MenuList aria-labelledby="basic-button" sx={{ outline: 'none' }}>
                     <Stack spacing={1} px={1} >
                         <MenuItem onClick={handleClick}>Reply</MenuItem>
-                        <MenuItem onClick={handleClick}>React</MenuItem>
-                        <MenuItem onClick={handleClick}>Forward</MenuItem>
-                        <MenuItem onClick={handleClick}>Star</MenuItem>
+                        <MenuItem onClick={handleClick}>React to message</MenuItem>
+                        <MenuItem onClick={handleClick}>Forward message</MenuItem>
+                        <MenuItem onClick={handleClick}>Star message</MenuItem>
                         <MenuItem onClick={handleClick}>Report</MenuItem>
-                        <MenuItem onClick={handleClick}>Delete</MenuItem>
+                        <MenuItem onClick={handleClick}>Delete message</MenuItem>
                     </Stack>
                 </MenuList>
             </Menu> 

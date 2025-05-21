@@ -32,7 +32,7 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   const theme = createTheme(themeOptions);
   theme.components = componentsOverride(theme);
-
+  
   return (
     <StyledEngineProvider injectFirst>
       <MUIThemeProvider theme={theme}>

@@ -8,13 +8,13 @@ const ReplyMessage = ({theme, incoming, message, reply, showMenu}: ReplyMessageP
         <MessageBody theme={theme} incoming={incoming} showMenu={showMenu}>
             <Stack spacing={2}>
                 <Stack p={2} direction='column' spacing={3} alignItems='center'
-                    sx={{ backgroundColor: theme.palette.background.paper, borderRadius: 1 }}
+                    sx={{ backgroundColor: theme.palette.background.neutral, borderRadius: 1 }}
                 >
                     <Typography variant='body2' color={theme.palette.text.primary}>
                         {message}
                     </Typography>
                 </Stack>
-                <Typography variant='body2' color={incoming ? theme.palette.text.secondary : '#fff'}>
+                <Typography variant='body2' color={incoming ? theme.palette.text.primary : '#fff'}>
                     {reply}
                 </Typography>
             </Stack>

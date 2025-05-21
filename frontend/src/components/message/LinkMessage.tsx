@@ -1,30 +1,27 @@
 import { Stack, Typography } from '@mui/material';
-import MessageBody, {type MessageBodyProps} from './MessageBody';
+import MessageBody, { type MessageBodyProps } from './MessageBody';
 import { Link } from 'react-router-dom';
 
 interface LinkMessageProps extends Omit<MessageBodyProps, 'children'> {
     preview: string;
     message: string;
-    to: string;
+    url: string;
 }
 
-const LinkMessage = ({theme, incoming, message, preview, to, showMenu}:LinkMessageProps) => {
+const LinkMessage = ({ theme, incoming, message, preview, url, showMenu }: LinkMessageProps) => {
     return (
         <MessageBody theme={theme} incoming={incoming} showMenu={showMenu}>
-            <Stack spacing={2}>
-                <Stack p={2} spacing={3} alignItems='start'
+                <Stack p={2} spacing={2} alignItems='center'
                     sx={{ backgroundColor: theme.palette.background.paper, borderRadius: 1 }}>
-                    <img src={preview} alt={message} style={{ maxHeight: 210, borderRadius: '10px' }} />
-                    <Stack spacing={2}>
-                        <Typography variant='subtitle2'>Creating Chat App</Typography>
+                    <img src={preview} alt={message} style={{ maxHeight: 210, borderRadius: '10px', objectFit: 'cover' }} />
+                    <Stack spacing={1} alignItems={'center'} textAlign={'center'}>
                         <Typography variant='subtitle2' sx={{ color: theme.palette.primary.main }}
-                            component={Link} to={to}>www.youtube.com</Typography>
+                            component={Link} to={url}>{url}</Typography>
+                        <Typography variant='body2' color={theme.palette.text.primary}>
+                            {message}
+                        </Typography>
                     </Stack>
-                    <Typography variant='body2' color={incoming ? theme.palette.text.secondary : '#fff'}>
-                        {message}
-                    </Typography>
                 </Stack>
-            </Stack>
         </MessageBody>
     )
 }

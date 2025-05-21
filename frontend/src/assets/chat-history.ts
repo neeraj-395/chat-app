@@ -16,8 +16,8 @@ function ImageMessages(count: number) {
     type: "msg",
     subtype: "img",
     message: faker.lorem.words(3),
-    img: faker.image.urlPicsumPhotos(),
-    incoming: faker.datatype.boolean()
+    image: faker.image.personPortrait(),
+    incoming: faker.datatype.boolean(),
   }));
 }
 
@@ -26,8 +26,8 @@ function DocMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
     subtype: "doc",
-    caption: "Document: " + faker.system.fileName(),
-    message: faker.lorem.lines(),
+    caption: faker.system.fileName(),
+    message: faker.lorem.sentence(),
     incoming: faker.datatype.boolean(),
   }));
 }
@@ -37,8 +37,9 @@ function LinkMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
     subtype: "link",
-    preview: faker.image.urlLoremFlickr(),
-    message: faker.internet.url(),
+    preview: faker.image.url({width: 360, height: 360}),
+    url: faker.internet.url(),
+    message: faker.lorem.sentence(),
     incoming: faker.datatype.boolean(),
   }));
 }
