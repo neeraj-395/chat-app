@@ -1,6 +1,5 @@
 import { faker } from "@faker-js/faker";
 
-// Generates text messages
 function TextMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
@@ -10,7 +9,6 @@ function TextMessages(count: number) {
   }));
 }
 
-// Generates image messages
 function ImageMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
@@ -21,7 +19,6 @@ function ImageMessages(count: number) {
   }));
 }
 
-// Generates document messages
 function DocMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
@@ -32,7 +29,6 @@ function DocMessages(count: number) {
   }));
 }
 
-// Generates link messages
 function LinkMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
@@ -44,7 +40,6 @@ function LinkMessages(count: number) {
   }));
 }
 
-// Generates reply messages
 function ReplyMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
@@ -55,8 +50,26 @@ function ReplyMessages(count: number) {
   }));
 }
 
-const ChatHistory = (text: number, img: number, doc: number, link: number, reply: number) => {
-  const chats = [
+interface ChatHistoryOptions {
+  type: "msg" | string;
+  subtype: "text" | "img" | "doc" | "link" | "reply" | string;
+  message: string;
+  incoming: boolean;
+  url?: string;
+  image?: string;
+  reply?: string;
+  caption?: string;
+  preview?: string;
+}
+
+const ChatHistory = (
+  text: number, 
+  img: number, 
+  doc: number, 
+  link: number, 
+  reply: number
+): ChatHistoryOptions[] => {
+  const chats: ChatHistoryOptions[] = [
     ...DocMessages(doc),
     ...TextMessages(text),
     ...ImageMessages(img),
@@ -66,5 +79,7 @@ const ChatHistory = (text: number, img: number, doc: number, link: number, reply
 
   return faker.helpers.shuffle(chats);
 }
+
+export { DocMessages, LinkMessages, ImageMessages, ReplyMessages, TextMessages }
 
 export default ChatHistory;

@@ -30,12 +30,15 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
       customShadows: isLight ? customShadows.light : customShadows.dark,
   }), [isLight, themeDirection]);
 
-  const theme = createTheme(themeOptions);
-  theme.components = componentsOverride(theme);
+  const basetheme = createTheme(themeOptions);
+  const finaltheme = createTheme({
+    ...basetheme,
+    components: componentsOverride(basetheme)
+  });
   
   return (
     <StyledEngineProvider injectFirst>
-      <MUIThemeProvider theme={theme}>
+      <MUIThemeProvider theme={finaltheme}>
         <CssBaseline />
         {children}
       </MUIThemeProvider>

@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import ThemeProvider from './theme/index.tsx'
+import ThemeProvider from './theme'
 import { store } from './app/store.ts';
 import { Provider as ReduxProvider } from 'react-redux'
 

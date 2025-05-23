@@ -1,4 +1,10 @@
-import { Theme as MuiTheme, PaletteColor, TypeAction, Color, TypeBackground } from "@mui/material";
+import { 
+  Theme as MuiTheme, 
+  PaletteColor, 
+  TypeAction,
+  Color, 
+  TypeBackground
+} from "@mui/material";
 
 // ---------------------
 // 1. Extend `PaletteColor`

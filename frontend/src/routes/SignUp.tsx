@@ -9,17 +9,18 @@ import PasswordField from '../components/form/PasswordField';
 import SubmitButton from '../components/form/SubmitButton';
 import RHFormProvider from '../components/form/RHFormProvider';
 
+
+const SignUpSchema = z.object({
+	firstname: z.string().min(1, 'First Name is required.'),
+	lastname: z.string().min(1, 'Last Name is required.'),
+	username: z.string().min(1, 'Username is required.'),
+	password: z.string().min(1, 'Password is required.'),
+	email: z.string().min(1, 'Email is required.').email('Not a valid email address.'),
+});
+
+type SignUpFormValues = z.infer<typeof SignUpSchema>;
+
 const SignUp = () => {
-
-	const SignUpSchema = z.object({
-		firstname: z.string().min(1, 'First Name is required.'),
-		lastname: z.string().min(1, 'Last Name is required.'),
-		username: z.string().min(1, 'Username is required.'),
-		password: z.string().min(1, 'Password is required.'),
-		email: z.string().min(1, 'Email is required.').email('Not a valid email address.'),
-	});
-
-	type SignUpFormValues = z.infer<typeof SignUpSchema>;
 
 	const methods = useForm<SignUpFormValues>({
 		resolver: zodResolver(SignUpSchema),

@@ -9,14 +9,14 @@ import SubmitButton from '../components/form/SubmitButton';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link, Stack, Typography, Alert } from '@mui/material'
 
+const SignInSchema = z.object({
+	username: z.string().min(1, 'Username is required.'),
+	password: z.string().min(1, 'Password is required.'),
+});
+
+type SignInFormValues = z.infer<typeof SignInSchema>;
+
 const SignIn = () => {
-
-	const SignInSchema = z.object({
-		username: z.string().min(1, 'Username is required.'),
-		password: z.string().min(1, 'Password is required.'),
-	});
-
-	type SignInFormValues = z.infer<typeof SignInSchema>;
 
 	const methods = useForm<SignInFormValues>({ resolver: zodResolver(SignInSchema) });
 

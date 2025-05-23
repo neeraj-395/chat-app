@@ -1,19 +1,18 @@
-import type { ReactNode } from "react";
-import { Stack, Box, type Theme } from "@mui/material";
+import type { ReactElement } from "react";
+import { Stack, Box } from "@mui/material";
 import MessageOptions from "./MessageOptions";
 
 export interface MessageBodyProps { 
-    children: ReactNode; 
-    theme: Theme; 
+    children: ReactElement;
     incoming: boolean; 
     showMenu: boolean; 
 }
 
-const MessageBody = ({children, theme, incoming, showMenu}: MessageBodyProps) => {
+const MessageBody = ({children, incoming, showMenu}: MessageBodyProps) => {
     return (
         <Stack direction='row' justifyContent={incoming ? 'start' : 'end'}>
             <Box p={1.5} justifyContent={'center'} sx={{
-                backgroundColor: incoming ? theme.palette.background.paper :
+                backgroundColor: (theme) => incoming ? theme.palette.background.paper :
                 theme.palette.primary.main, borderRadius: 1.5, maxWidth: '40%'
             }}>
                 {children}

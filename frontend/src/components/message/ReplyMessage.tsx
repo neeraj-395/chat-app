@@ -1,20 +1,24 @@
 import { Stack, Typography, } from "@mui/material";
 import MessageBody, { type MessageBodyProps } from "./MessageBody";
 
-interface ReplyMessageProps extends Omit<MessageBodyProps, 'children'> { message: string; reply: string;}
+interface ReplyMessageProps extends Omit<MessageBodyProps, 'children'> { message: string; reply?: string; }
 
-const ReplyMessage = ({theme, incoming, message, reply, showMenu}: ReplyMessageProps) => {
+const ReplyMessage = ({incoming, message, reply, showMenu}: ReplyMessageProps) => {
     return (
-        <MessageBody theme={theme} incoming={incoming} showMenu={showMenu}>
+        <MessageBody incoming={incoming} showMenu={showMenu}>
             <Stack spacing={2}>
                 <Stack p={2} direction='column' spacing={3} alignItems='center'
-                    sx={{ backgroundColor: theme.palette.background.neutral, borderRadius: 1 }}
+                    sx={{ backgroundColor: (theme) => theme.palette.background.neutral, borderRadius: 1 }}
                 >
-                    <Typography variant='body2' color={theme.palette.text.primary}>
+                    <Typography variant='body2' sx={{
+                        color: (theme) => theme.palette.text.primary
+                    }}>
                         {message}
                     </Typography>
                 </Stack>
-                <Typography variant='body2' color={incoming ? theme.palette.text.primary : '#fff'}>
+                <Typography variant='body2' sx={{
+                    color: (theme) => incoming ? theme.palette.text.primary : '#fff'
+                }}>
                     {reply}
                 </Typography>
             </Stack>

@@ -6,6 +6,7 @@ import MainLayout from "./components/layouts/MainLayout"
 import DashboardLayout from "./components/layouts/DashboardLayout";
 import Settings from "./routes/Settings";
 import Chats from "./routes/Chats";
+import Profile from "./routes/Profile";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Navigate to={"/chats"} replace/>} />
           <Route path="/chats" element={<Chats />}/>
           <Route path="/groups" element={<Groups />}/>
+          <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>

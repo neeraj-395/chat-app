@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { SidebarType } from "../app/constants";
 
 export interface SidebarState { open: boolean; type: SidebarType; }
@@ -12,8 +12,8 @@ const SidebarSlice = createSlice({
         toggleSidebar(state) {
             state.open = !state.open
         },
-        updateSidebarType(state, action) {
-            state.type = action.payload.type;
+        updateSidebarType(state, action: PayloadAction<SidebarType>) {
+            state.type = action.payload;
         }
     }
 });
