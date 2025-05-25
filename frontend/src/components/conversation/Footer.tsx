@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { useTheme } from "@mui/material/styles";
 import { PaperPlaneTilt } from 'phosphor-react';
 import ChatInput from '../chat/ChatInput';
-// import data from '@emoji-mart/data'
-// import Picker from '@emoji-mart/react'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 
 const Footer = () => {
     const theme = useTheme();
-    const [_, setOpenPicker] = useState(false);
+    const [message, setMessage] = useState('');
+    const [openPicker, setOpenPicker] = useState(false);
     const bgColor = theme.palette.mode === 'light' ? '#F8FAFF': theme.palette.background.paper;
     
     return (
@@ -17,12 +18,16 @@ const Footer = () => {
         }}>
             <Stack direction='row' alignItems={'center'} spacing={3}>
 
+                {/* Chat Input */}
                 <Stack sx={{ width: '100%' }}>
-                    {/* Chat Input */}
-                    {/* <Box sx={{ display: openPicker ? 'inline' : 'none', zIndex: 10, position: 'fixed', bottom: 81, right: 100 }}>
-                        <Picker theme={theme.palette.mode} data={data} onEmojiSelect={console.log} />
-                    </Box> */}
-                    <ChatInput setOpenPicker={setOpenPicker} />
+                    <Box sx={{ display: openPicker ? 'inline' : 'none', zIndex: 10, position: 'fixed', bottom: 81, right: 100 }}>
+                        <Picker theme={theme.palette.mode} data={data} onEmojiSelect={
+                            (emoji: any) => setMessage(prev => prev + emoji.native)
+                        }/>
+                    </Box>
+                    <ChatInput value={message} setOpenPicker={setOpenPicker} onChange={
+                        (event) => setMessage(event.target.value)
+                    }/>
                 </Stack>
 
                 <Box sx={{ height: 48, width: 48, borderRadius: 1.5,

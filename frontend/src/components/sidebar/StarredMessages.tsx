@@ -1,5 +1,5 @@
 import Header from './Header';
-import Messages from '../message';
+import Message from '../message';
 import { CaretLeft } from 'phosphor-react';
 import { useAppDispatch } from '../../app/hook';
 import ChatHistory from '../../assets/chat-history';
@@ -17,9 +17,14 @@ const StarredMessages = () => {
 
 			<Stack className='scrollbar' p={3} spacing={3} sx={{
 				height: '100%', position: 'relative',
-				flexGrow: 1, overflowY: 'scroll'
+				flexGrow: 1, overflowY: 'scroll',
+				backgroundColor: (theme) => theme.palette.background.neutral
 			}}>
-				<Messages data={ChatHistory(2, 1, 1, 1, 2)} showMenu={false} />
+				{ChatHistory(1, 1, 1, 1, 1).map((msg, i) => (
+					<Message key={i} message={msg} position='center' showMenu={false} sx={{
+						maxWidth: 'max-content'
+					}} />
+				))}
 			</Stack>
 		</Stack>
 	)

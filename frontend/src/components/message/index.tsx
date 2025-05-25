@@ -1,41 +1,44 @@
-import { Box, Stack } from '@mui/material';
-import DocMessage from './DocMessage';
-import TextMessage from './TextMessage';
-import LinkMessage from './LinkMessage';
-import ReplyMessage from './ReplyMessage';
-import MediaMessage from './MediaMessage';
+import { Box, Stack, type SxProps, type Theme } from '@mui/material';
+import MessageOptions from './MessageOptions';
+import DocMessage, { type DocMessageProps } from './DocMessage';
+import TextMessage, { type TextMessageProps } from './TextMessage';
+import LinkMessage, { type LinkMessageProps } from './LinkMessage';
+import ReplyMessage, { type ReplyMessageProps } from './ReplyMessage';
+import MediaMessage, { type MediaMessageProps } from './MediaMessage';
 
-export interface MessageOptions {
-    type: "msg" | string;
-    subtype: "text" | "img" | "doc" | "link" | "reply" | string;
-    message: string;
-    incoming: boolean;
-    url?: string;
-    image?: string;
-    reply?: string;
-    caption?: string;
-    preview?: string;
+export type MessageOptions = { type: string, subtype: string, incoming: boolean } & (
+    DocMessageProps | TextMessageProps | LinkMessageProps |
+    ReplyMessageProps | MediaMessageProps
+);
+
+export interface MessagesProps {
+    message: MessageOptions;
+    position: "center" | "auto";
+    sx?: SxProps<Theme>; 
+    showMenu: boolean;
 }
 
-export interface MessagesProps { data: MessageOptions[]; showMenu: boolean; }
-
-const Messages = ({data, showMenu}: MessagesProps) => {
+const Message = ({ position, sx, message, showMenu }: MessagesProps) => {
+    const justify = (incoming: boolean) => position == 'auto' ? incoming ? 'start' : 'end' : position;
+    const bgColor = (theme: Theme) => message.incoming ? theme.palette.background.paper: theme.palette.primary.main;
     return (
-        <Box p={3}>
-            <Stack spacing={3} justifyContent={'center'}>
-                {data.map((props, i) => {
-                    switch (props.subtype) {
-                        case 'text':  return <TextMessage key={i} {...props} showMenu={showMenu} />
-                        case 'img':   return <MediaMessage key={i} {...props} showMenu={showMenu} />
-                        case 'doc':   return <DocMessage key={i} {...props} showMenu={showMenu} />
-                        case 'link':  return <LinkMessage key={i} {...props} showMenu={showMenu} />
-                        case 'reply': return <ReplyMessage key={i} {...props} showMenu={showMenu} />
-                        default:      return <>No messages found...</>
+        <Stack direction='row' justifyContent={justify(message.incoming)}>
+            <Box p={1.5} bgcolor={bgColor} borderRadius={1.5} sx={sx}>
+                {(() => {
+                    switch (message.subtype) {
+                        case 'text': return <TextMessage {...message} />
+                        case 'img': return <MediaMessage {...message} />
+                        case 'doc': return <DocMessage {...message} />
+                        case 'link': return <LinkMessage {...message} />
+                        case 'reply': return <ReplyMessage {...message} />
+                        default: return <>No messages found...</>
                     }
-                })}
-            </Stack>
-        </Box>
+                })()}
+            </Box>
+
+            {showMenu && <MessageOptions />}
+        </Stack>
     )
 }
 
-export default Messages;
+export default Message;

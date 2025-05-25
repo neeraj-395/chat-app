@@ -4,7 +4,7 @@ function TextMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
     subtype: "text",
-    message: faker.lorem.sentence(),
+    text: faker.lorem.sentence(),
     incoming: faker.datatype.boolean(),
   }));
 }
@@ -13,8 +13,8 @@ function ImageMessages(count: number) {
   return Array.from({ length: count }, () => ({
     type: "msg",
     subtype: "img",
-    message: faker.lorem.words(3),
-    image: faker.image.personPortrait(),
+    text: faker.lorem.sentence(),
+    image: faker.image.personPortrait({size: 256}),
     incoming: faker.datatype.boolean(),
   }));
 }
@@ -24,7 +24,7 @@ function DocMessages(count: number) {
     type: "msg",
     subtype: "doc",
     caption: faker.system.fileName(),
-    message: faker.lorem.sentence(),
+    text: faker.lorem.sentence(),
     incoming: faker.datatype.boolean(),
   }));
 }
@@ -35,7 +35,7 @@ function LinkMessages(count: number) {
     subtype: "link",
     preview: faker.image.url({width: 360, height: 360}),
     url: faker.internet.url(),
-    message: faker.lorem.sentence(),
+    text: faker.lorem.sentence(),
     incoming: faker.datatype.boolean(),
   }));
 }
@@ -45,7 +45,7 @@ function ReplyMessages(count: number) {
     type: "msg",
     subtype: "reply",
     reply: faker.lorem.sentence(),
-    message: faker.lorem.sentence(),
+    text: faker.lorem.sentence(),
     incoming: faker.datatype.boolean(),
   }));
 }
@@ -53,7 +53,7 @@ function ReplyMessages(count: number) {
 interface ChatHistoryOptions {
   type: "msg" | string;
   subtype: "text" | "img" | "doc" | "link" | "reply" | string;
-  message: string;
+  text: string;
   incoming: boolean;
   url?: string;
   image?: string;
